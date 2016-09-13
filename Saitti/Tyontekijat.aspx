@@ -12,7 +12,7 @@
         <asp:Button ID="btnHae" runat="server" Text="Hae työntekijät" OnClick="btnHae_Click" />
         <div id="esitys">
             <h2>Työntekijämme</h2>
-            <asp:GridView ID="gvData" runat="server"></asp:GridView>
+            <asp:GridView ID="gvData" runat="server" OnSelectedIndexChanged="gvData_SelectedIndexChanged"></asp:GridView>
         </div>
         <div id="footer">
             <asp:Label ID="lblMessages" runat="server" Text="..."></asp:Label>

@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:TextBox ID="txtNimi" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtNimi" runat="server" OnTextChanged="txtNimi_TextChanged"></asp:TextBox>
         <asp:Button ID="btnTervehdi" runat="server" Text="Say Hello" OnClick="btnTervehdi_Click" />
         <asp:Label ID="lblTulos" runat="server" Text="---"/>
     </div>
