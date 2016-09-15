@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration; //Web.Configin lukemista varten
+using System.Globalization;
 
 public partial class Tehtava1 : System.Web.UI.Page
 {
@@ -46,7 +47,7 @@ public partial class Tehtava1 : System.Web.UI.Page
             Label1.Text = "joo"; // ala.ToString();
             TextBox4.Text = (ala / 1000 / 1000).ToString(); // ala.ToString(); /// !!! ei 1 -> 4
             TextBox5.Text = (k_piiri / 1000).ToString();
-            TextBox6.Text = hinta.ToString();
+            TextBox6.Text = hinta.ToString("C2",CultureInfo.CreateSpecificCulture("fi-Fi"));
         }
         catch (Exception ex)
         {
@@ -87,7 +88,7 @@ public class BL
 
     public static double Hinta(double ala, double piiri, double k_leveys, double l ,double k)
     {
-        double kate = 1 + 0.30, LasinNelioHinta = 45, KarminMetri = 100, TyoIkkunalle = 150;
+        double kate = 1 + 0.30, LasinNelioHinta = 45, KarminMetri = Convert.ToDouble(ConfigurationManager.AppSettings["alu"]) , TyoIkkunalle = 150;
 
 
         //kpa = k * k_leveys * 2 + (l - 2 * k_leveys) * 2;
