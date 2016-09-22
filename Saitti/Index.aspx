@@ -25,6 +25,13 @@
                 <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/ShowCustomers.aspx">Show WineCustomers</asp:HyperLink>
             </p>
         </div>
+        <p>
+            To 22.9.2016</p>
+        <p>
+            Tiedon välitys sivulta toiselle:</p>
+        <p>
+            &nbsp;</p>
+        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Source.aspx">Tiedon välitys</asp:HyperLink>
     </form>
 </body>
 </html>
