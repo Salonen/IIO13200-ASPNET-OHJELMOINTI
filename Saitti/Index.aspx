@@ -12,6 +12,10 @@
         <div>
             <h1>IIO13200. NET Ohjelmointi</h1>
             <h2>1.kontaktikerta</h2>
+            <p>Simon oma hieno webbisaitti.</p>
+            <h3>Perus HTML kontrolleja</h3>
+            <a href="Testi.html">Testi html-sivu</a>
+            <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl="~/Hello.aspx">My First ASPX page</asp:LinkButton>
             <p>
                 Esimerkki ASP.NET DataKontrollista
                 <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/ShowPhotos.aspx">Show Photos</asp:HyperLink>
@@ -21,6 +25,13 @@
                 <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/ShowCustomers.aspx">Show WineCustomers</asp:HyperLink>
             </p>
         </div>
+        <p>
+            To 22.9.2016</p>
+        <p>
+            Tiedon välitys sivulta toiselle:</p>
+        <p>
+            &nbsp;</p>
+        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Source.aspx">Tiedon välitys</asp:HyperLink>
     </form>
 </body>
 </html>
