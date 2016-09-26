@@ -12,8 +12,18 @@
     
     </div>
         <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged"></asp:Calendar>
-        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        syntymäpäivä<asp:TextBox ID="TextBox1" runat="server" Width="341px"></asp:TextBox>
+        <p>
+        tämä päivä<asp:TextBox ID="TextBox2" runat="server" Width="344px"></asp:TextBox>
+        </p>
+        ero1<asp:TextBox ID="TextBox3" runat="server" Width="315px"></asp:TextBox>
+
+        <p>
+        ero2<asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+        </p>
+
+        Lopullinen ero<asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+
     </form>
 </body>
 </html>
