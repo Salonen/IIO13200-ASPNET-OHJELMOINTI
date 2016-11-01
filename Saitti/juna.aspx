@@ -14,6 +14,7 @@
              <h2>Työntekijämme</h2>
             <asp:GridView 
                 ID="gvData" runat="server"></asp:GridView>
+             <asp:ListBox ID="ListBox2" runat="server" Width="278px"></asp:ListBox>
              <asp:TextBox ID="TextBox1" runat="server" Height="210px" Width="1843px" TextMode="MultiLine"></asp:TextBox>
         </div>
         <div id="footer">
@@ -22,8 +23,10 @@
                 Text="..."></asp:Label>
         </div>
     </div>
-        <asp:ListBox ID="ListBox1" runat="server" Height="176px" Width="314px"></asp:ListBox>
-        <asp:TextBox ID="TextBox2" runat="server" Height="140px" style="margin-top: 0px" Width="330px"></asp:TextBox>
+        <asp:ListBox ID="ListBox1" runat="server" Height="176px" Width="314px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged"></asp:ListBox>
+        <asp:TextBox ID="TextBox2" runat="server" Height="140px" style="margin-top: 0px" Width="330px" TextMode="MultiLine" ></asp:TextBox>
+        <asp:CheckBoxList ID="CheckBoxList1" runat="server" Height="105px" OnSelectedIndexChanged="CheckBoxList1_SelectedIndexChanged" Width="143px">
+        </asp:CheckBoxList>
     </form>
 </body>
 </html>

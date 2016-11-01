@@ -26,12 +26,19 @@ using System.Xml.Linq;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Web.UI.WebControls;
 
 public partial class Tyontekijat : System.Web.UI.Page
 {
+    int tila = 0, vali = 0, vipu = 0;
+    string sana = "joo";
+
+
+
     string xmlfilu;
     protected void Page_Load(object sender, EventArgs e)
     {
+               
         //haetaan web.configista xml-tiedoston nimi
         xmlfilu = ConfigurationManager.AppSettings["kino"];
         lblMessages.Text = xmlfilu;
@@ -40,6 +47,10 @@ public partial class Tyontekijat : System.Web.UI.Page
 
     protected void btnHae_Click(object sender, EventArgs e)
     {
+        try
+        {
+
+        
         //haetaan XML-data DataView-olioon, joka kytketään GridViewhen
        // DataSet ds = new DataSet();
         DataTable dt = new DataTable();
@@ -59,9 +70,41 @@ public partial class Tyontekijat : System.Web.UI.Page
         // Do some work here on the data.
         //http://rata.digitraffic.fi/api/v1/live-trains?station=HKI
 
+        //listBox1.ClearSelected();
+        //listbox1.Items.Clear();
+
         using (var webClient = new System.Net.WebClient())
         {
-            var json = webClient.DownloadString("http://rata.digitraffic.fi/api/v1/live-trains?station=JK");
+            /*if (tila == 0)
+            {
+                var json = webClient.DownloadString("http://rata.digitraffic.fi/api/v1/live-trains?station=JK");
+            }
+            else
+            {*/
+            //string url = string.Format("http://rata.digitraffic.fi/api/v1/live-trains?station={0}", "HKI");
+
+                var json2 = webClient.DownloadString("http://rata.digitraffic.fi/api/v1/metadata/stations");
+                List<dynamic> p2 = JsonConvert.DeserializeObject<List<dynamic>>(json2);
+            //listbox1.Items.Clear();
+            if (tila == 0)
+            {
+                for (int i = 0; i < p2.Count; i++)
+                {
+                //TextBox1.Text += " \n " + p[i].trainNumber + " : " + p[0]["cancelled"] + " : " + p[0]["departureDate"];
+                    
+                        ListBox1.Items.Add(p2[i]["stationName"].ToString() + " : " + p2[i]["stationShortCode"]);
+                    }
+
+            }
+            tila = 1;
+
+            var json = webClient.DownloadString(string.Format("http://rata.digitraffic.fi/api/v1/live-trains?station={0}", p2[vali]["stationShortCode"].ToString()));
+            TextBox1.Text = vali.ToString();// p2[1]["stationShortCode"].ToString();
+            
+            /*}*/
+            //var json2 = webClient.DownloadString("http://rata.digitraffic.fi/api/v1/metadata/stations");
+
+            //http://rata.digitraffic.fi/api/v1/metadata/stations
             //dt = (DataTable)JsonConvert.DeserializeObject(json, (typeof(DataTable)));
             //dt = JsonConvert.DeserializeObject<dt>(json);
             //var result = JsonConvert.DeserializeObject<T>(json);
@@ -76,11 +119,12 @@ public partial class Tyontekijat : System.Web.UI.Page
 
             //dynamic p = JsonConvert.DeserializeObject<dynamic>(json);
             List<dynamic> p = JsonConvert.DeserializeObject<List<dynamic>>(json);
+            //List<dynamic> p2 = JsonConvert.DeserializeObject<List<dynamic>>(json2);
 
             //TextBox2.Text = p[0].countryCode;// Text.ToString();*/
             //TextBox2.Text = "kokoko";
-     //   string sss = p[0].trainNumber;// Text.ToString();*/
-     //   TextBox2.Text = sss;
+            //   string sss = p[0].trainNumber;// Text.ToString();*/
+            //   TextBox2.Text = sss;
             //dt = CreateDataTable(typeof());
             //dt = CreateDataTable(p);
             //dt.Rows.Add(p[0]);
@@ -91,11 +135,32 @@ public partial class Tyontekijat : System.Web.UI.Page
             JToken jUser = jObject["trainNumber"];
             string sss = jUser["players"].ToArray();*/
             //string sss  = (string)jUser["stationShortCode"];
-            string joo = p[0]["timeTableRows"][1]["stationShortCode"].ToString();
-           // string joo = p[0]["timeTableRows"][1]["stationShortCode"].ToString();
+   //         string joo = p[0]["timeTableRows"][1]["stationShortCode"].ToString();
+            // string joo = p[0]["timeTableRows"][1]["stationShortCode"].ToString();
+            if (vipu == 0)
+            {
+                TextBox2.Text = "";
+                ListBox2.Items.Clear();
+                for (int i = 0; i < p.Count; i++)
+                {
+              
+                    TextBox2.Text += " \n " + p[i].trainNumber + " : " + p[0]["cancelled"] + " : " + p[0]["departureDate"];
+                    ListBox2.Items.Add(p[i]["trainNumber"].ToString());
+                }
+            }
+            vipu = 1;
+
+           /* for (int i = 0; i < p2.Count; i++)
+            {
+                //TextBox1.Text += " \n " + p[i].trainNumber + " : " + p[0]["cancelled"] + " : " + p[0]["departureDate"];
+                ListBox1.Items.Add(p2[i]["stationName"].ToString() + " : " + p2[i]["stationShortCode"]);
+            }*/
 
 
-            TextBox2.Text = joo + p[0].trainNumber;
+
+            //TextBox2.Text = joo + p[0].trainNumber;
+
+
 
             //dynamic d = JObject.Parse(json);
 
@@ -116,7 +181,7 @@ public partial class Tyontekijat : System.Web.UI.Page
             //TextBox1.Text = json.ToString(); 
             /*ListBox1.Items.Add(json);*/
             //string str = "Some number of characters";
-            string j = p[1].trainNumber; //"sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
+ /*string j = p[1].trainNumber; //"sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss";
 
        //string j = json;
 
@@ -134,7 +199,7 @@ public partial class Tyontekijat : System.Web.UI.Page
                 }
                 TextBox1.Text += letters[m].ToString();
                 ListBox1.Items.Add(letters[m].ToString());
-            }
+ }*/
 
             /*char[] b = new char[j.Length];
 
@@ -176,6 +241,37 @@ public partial class Tyontekijat : System.Web.UI.Page
         dv = dt.DefaultView;
         gvData.DataSource = dv;
         gvData.DataBind();
-        //}/**/
+            //}/**/
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
+
+    protected void CheckBoxList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+
+        
+        //tila = 1;
+        sana = ListBox1.SelectedItem.ToString();
+        vipu = 0;
+        vali = ListBox1.SelectedIndex;
+            //listBox1.ClearSelected();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+
 }
