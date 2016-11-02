@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
+// System, System.Drawing and 
+    
+//using System.Windows.Forms
 
 public partial class levy : System.Web.UI.Page
 {
+    string joo = "images / Anna2009.jpg";
+
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -49,6 +56,27 @@ public partial class levy : System.Web.UI.Page
 
         TextBox1.Text = jii;
 
+        //Bitmap myBmp = Bitmap.FromFile("path here");
+        //Bitmap myBmp = new Bitmap("path here");
+
+        string koo = "images/Laura2012.jpg";
+        image.Src = koo;
+
+        //Image ima = Image.FromFile("c:\\FakePhoto1.jpg"); 
+        //Image1.Page =myBmp;// FromFile("c:\\FakePhoto2.jpg");
+        //Image i = Image.FromFile("image.jpg");
+
+
+
+
+        //Image image = new Bitmap(@"c:\FakePhoto.jpg");
+
+        //Image i = Image.FromFile("image.jpg");
+
+        //Canvas.Children.Add(image);
+
+
+
         //XmlNodeList elemList = doc.SelectNodes("genre");
 
         /*        for (int i = 0; i < elemList.Count; i++)
@@ -56,4 +84,26 @@ public partial class levy : System.Web.UI.Page
                     TextBox1.Text += elemList[i].ToString();
                 }*/
     }
+
+
+    /*public void CreateBitmapAtRuntime()
+    {
+        PictureBox pictureBox1 = new PictureBox();
+        pictureBox1.Size = new Size(210, 110);
+        this.Controls.Add(pictureBox1);
+
+        Bitmap flag = new Bitmap(200, 100);
+        Graphics flagGraphics = Graphics.FromImage(flag);
+        int red = 0;
+        int white = 11;
+        while (white <= 100)
+        {
+            flagGraphics.FillRectangle(Brushes.Red, 0, red, 200, 10);
+            flagGraphics.FillRectangle(Brushes.White, 0, white, 200, 10);
+            red += 20;
+            white += 20;
+        }
+        pictureBox1.Image = flag;
+
+    }*/
 }
