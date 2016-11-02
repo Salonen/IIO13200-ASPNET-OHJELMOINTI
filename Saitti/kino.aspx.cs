@@ -25,7 +25,7 @@ using System.Xml;
 
 public partial class Tyontekijat : System.Web.UI.Page
 {
-    
+    int index = 0,tila = 0;
     protected void btnHae_Click(object sender, EventArgs e)
     {
 
@@ -43,9 +43,20 @@ public partial class Tyontekijat : System.Web.UI.Page
         XmlNodeList elemList = doc.GetElementsByTagName("Name");
         XmlNodeList elemListB = doc.GetElementsByTagName("ID");
 
-   
+            if (tila == 0)
+            {
+                for (int j = 0; j < elemList.Count; j++)
+                {
+                    //TextBox1.Text += " \n " + p[i].trainNumber + " : " + p[0]["cancelled"] + " : " + p[0]["departureDate"];
 
-        String URLString2 = "http://www.finnkino.fi/xml/Schedule/";
+                    ListBox1.Items.Add(elemList[j].InnerText);
+                }
+
+            }
+            tila = 1;
+
+
+            String URLString2 = "http://www.finnkino.fi/xml/Schedule/";
         XmlTextReader reader2 = new XmlTextReader(URLString2);
 
         XmlDocument doc2 = new XmlDocument();
@@ -55,7 +66,8 @@ public partial class Tyontekijat : System.Web.UI.Page
 
         int pois = 1;
         int i = 0;
-        for (; i < elemList.Count && pois == 1; i++)
+            TextBox3.Text = index.ToString() + "\n";
+        /*for (; i < elemList.Count && pois == 1; i++)
         {
             if (elemList[i].InnerText == "Tampere: Cine Atlas")
             {
@@ -63,24 +75,34 @@ public partial class Tyontekijat : System.Web.UI.Page
                 i--;
             }
 
-        }
+        }*/
 
-        string id = elemListB[i].InnerText.ToString();
+        string id = elemListB[index].InnerText.ToString();
 
         XmlNodeList elemList2 = doc2.GetElementsByTagName("Title");
         XmlNodeList elemList2B = doc2.GetElementsByTagName("TheatreID");
         XmlNodeList elemList2C = doc2.GetElementsByTagName("EventMicroImagePortrait");
 
-        
+        //elemList2.Item(30).ChildNodes.Item(67);
         List<string> url = new List<string>();
 
+            //var authors = doc.Descendants("Author");
+            //TextBox3.Text += elemListB[index].InnerText.ToString() + "\n";
+            //for (int j=0;j<elemList2B.Count;j++) TextBox3.Text += " \n " + elemList2B[j].InnerText.ToString();
+            TextBox3.Text += elemListB[index].InnerText.ToString() + "\n";
+            for (int j = 0; j < elemList2B.Count; j++) TextBox3.Text += " \n " + elemList2B[j].InnerText.ToString();
+            //TextBox3.Text = elemListB[index].InnerText.ToString();
 
-        for (int j = 0; j < elemList2.Count; j++)
+
+            for (int j = 0; j < elemList2.Count; j++)
         {
-            if (elemList2B[j].InnerText == id)
-            {
-                TextBox2.Text += elemList2[j].InnerText;
-                if (j < elemList2C.Count) url.Add(elemList2C[j].InnerText);
+               // TextBox3.Text = elemList2B[j].ToString();
+                if (elemList2B[j].InnerText.ToString() == elemListB[index].InnerText.ToString()/*id*/)
+                {
+                    TextBox2.Text += elemList2[j].InnerText;
+                    //TextBox2.Text += doc2["Title"];
+                    //TextBox3.Text = elemList2B[j].ToString();
+                    if (j < elemList2C.Count) url.Add(elemList2C[j].InnerText);
             }
         }
 
@@ -95,5 +117,10 @@ public partial class Tyontekijat : System.Web.UI.Page
 
             throw;
         }
+    }
+
+    protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        index = ListBox1.SelectedIndex;
     }
 }

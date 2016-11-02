@@ -11,7 +11,9 @@
     <div>
         <asp:Button ID="btnHae" runat="server" Text="Hae elokuvat" OnClick="btnHae_Click" />
         <div id="esitys">
-             <h2>Elokuvat</h2>
+             <h2>Elokuvat<asp:ListBox ID="ListBox1" runat="server" Height="215px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" style="margin-top: 0px" Width="266px"></asp:ListBox>
+                 <asp:TextBox ID="TextBox3" runat="server" Height="199px" Width="158px" TextMode="MultiLine"></asp:TextBox>
+             </h2>
             <asp:Repeater ID="Repeater1" runat="server" >
         <ItemTemplate>
             <asp:Image ID="Image1" Width="150px" ImageUrl='<%# Container.DataItem  %>' runat="server" /> 
