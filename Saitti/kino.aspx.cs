@@ -56,7 +56,7 @@ public partial class Tyontekijat : System.Web.UI.Page
             tila = 1;
 
 
-            String URLString2 = "http://www.finnkino.fi/xml/Schedule/";
+            String URLString2 = string.Format("http://www.finnkino.fi/xml/Schedule/?area={0}", elemListB[index].InnerText);
         XmlTextReader reader2 = new XmlTextReader(URLString2);
 
         XmlDocument doc2 = new XmlDocument();
@@ -80,11 +80,13 @@ public partial class Tyontekijat : System.Web.UI.Page
         string id = elemListB[index].InnerText.ToString();
 
         XmlNodeList elemList2 = doc2.GetElementsByTagName("Title");
-        XmlNodeList elemList2B = doc2.GetElementsByTagName("TheatreID");
+        XmlNodeList elemList2B = doc2.GetElementsByTagName("area");
         XmlNodeList elemList2C = doc2.GetElementsByTagName("EventMicroImagePortrait");
 
-        //elemList2.Item(30).ChildNodes.Item(67);
-        List<string> url = new List<string>();
+            //string attrVal = elemList[i].Attributes["SuperString"].Value;
+
+            //elemList2.Item(30).ChildNodes.Item(67);
+            List<string> url = new List<string>();
 
             //var authors = doc.Descendants("Author");
             //TextBox3.Text += elemListB[index].InnerText.ToString() + "\n";
@@ -93,18 +95,22 @@ public partial class Tyontekijat : System.Web.UI.Page
             for (int j = 0; j < elemList2B.Count; j++) TextBox3.Text += " \n " + elemList2B[j].InnerText.ToString();
             //TextBox3.Text = elemListB[index].InnerText.ToString();
 
-
+            TextBox2.Text = "";
             for (int j = 0; j < elemList2.Count; j++)
-        {
+           {
+                url.Add(elemList2C[j].InnerText);
+
                // TextBox3.Text = elemList2B[j].ToString();
-                if (elemList2B[j].InnerText.ToString() == elemListB[index].InnerText.ToString()/*id*/)
-                {
-                    TextBox2.Text += elemList2[j].InnerText;
-                    //TextBox2.Text += doc2["Title"];
-                    //TextBox3.Text = elemList2B[j].ToString();
-                    if (j < elemList2C.Count) url.Add(elemList2C[j].InnerText);
+               //           if (elemList2B[j].InnerText.ToString() == elemListB[index].InnerText.ToString()/*id*/)
+               //           {
+                            TextBox2.Text += elemList2[j].InnerText;
+               //TextBox2.Text += doc2["Title"];
+               //TextBox3.Text = elemList2B[j].ToString();
+               //            if (j < elemList2C.Count) url.Add(elemList2C[j].InnerText);
             }
-        }
+
+
+        
 
         
 

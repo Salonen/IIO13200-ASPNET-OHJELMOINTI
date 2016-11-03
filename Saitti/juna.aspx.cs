@@ -84,7 +84,7 @@ public partial class Tyontekijat : System.Web.UI.Page
             //string url = string.Format("http://rata.digitraffic.fi/api/v1/live-trains?station={0}", "HKI");
 
                 var json2 = webClient.DownloadString("http://rata.digitraffic.fi/api/v1/metadata/stations");
-                List<dynamic> p2 = JsonConvert.DeserializeObject<List<dynamic>>(json2);
+                List<dynamic> p2 = JsonConvert.DeserializeObject<List<dynamic>>(json2); 
             //listbox1.Items.Clear();
             if (tila == 0)
             {

@@ -59,8 +59,13 @@ public partial class levy : System.Web.UI.Page
         //Bitmap myBmp = Bitmap.FromFile("path here");
         //Bitmap myBmp = new Bitmap("path here");
 
+        /*ImageMap h = new ImageMap();
+
+        h =*/
         string koo = "images/Laura2012.jpg";
         image.Src = koo;
+
+        //ImageMap1 = koo;
 
         //Image ima = Image.FromFile("c:\\FakePhoto1.jpg"); 
         //Image1.Page =myBmp;// FromFile("c:\\FakePhoto2.jpg");
