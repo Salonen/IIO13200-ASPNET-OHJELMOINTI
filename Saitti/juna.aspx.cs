@@ -88,7 +88,8 @@ public partial class Tyontekijat : System.Web.UI.Page
             //listbox1.Items.Clear();
             if (tila == 0)
             {
-                for (int i = 0; i < p2.Count; i++)
+                    ListBox1.Items.Clear();
+                    for (int i = 0; i < p2.Count; i++)
                 {
                 //TextBox1.Text += " \n " + p[i].trainNumber + " : " + p[0]["cancelled"] + " : " + p[0]["departureDate"];
                     

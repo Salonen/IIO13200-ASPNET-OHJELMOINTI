@@ -18,19 +18,26 @@
     
     </div>
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-        <p>
-        <asp:Image ID="Image1" runat="server" Height="101px" Width="113px" />
-            <asp:TextBox ID="TextBox1" runat="server" Height="173px" Width="684px" TextMode="MultiLine" style="margin-left: 527px"></asp:TextBox>
-            <asp:Repeater ID="Repeater1" runat="server">
-            </asp:Repeater>
-        </p>
-        &nbsp;<img src="images/Anna2009.jpg" alt="Sample" style="height: 132px; width: 131px" />
-        <asp:Image ID="Image2" runat="server" Height="105px" Width="124px" />
+       <!-- &nbsp;-->
+        
+        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Button" />
         <p>
         
-        <img id="image" src="images/Paula2012.JPG" runat="server" /><asp:DataList ID="DataList1" runat="server" DataSourceID="joo">
-            </asp:DataList>
+        <img id="image" src="" runat="server" style="height: 132px; width: 131px"/>
+        <img id="image2" src="" runat="server" style="height: 132px; width: 131px" />
+        <img id="image3" src="" runat="server" style="height: 132px; width: 131px" />
+        <img id="image4" src="" runat="server" style="height: 132px; width: 131px" />
+        <img id="image5" src="" runat="server" style="height: 132px; width: 131px" />
+        <img id="image6" src="" runat="server" style="height: 132px; width: 131px" />
+        <img id="image7" src="" runat="server" style="height: 132px; width: 131px" />
+            
+        </p>
+    <img id="image8" src="" runat="server"/>
+        <p>
+        <asp:TextBox ID="TextBox1" Text="1" runat="server" TextMode="MultiLine" Height="100px" Width="627px"></asp:TextBox>
+            Anna kuvan numero 1-5
+            <asp:ListBox ID="ListBox1" runat="server" Height="99px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" style="margin-top: 0px" Width="514px"></asp:ListBox>
         </p>
     </form>
-</body>
+    </body>
 </html>

@@ -43,6 +43,8 @@ public partial class Tyontekijat : System.Web.UI.Page
         XmlNodeList elemList = doc.GetElementsByTagName("Name");
         XmlNodeList elemListB = doc.GetElementsByTagName("ID");
 
+            ListBox1.Items.Clear();
+
             if (tila == 0)
             {
                 for (int j = 0; j < elemList.Count; j++)

@@ -13,102 +13,91 @@ using System.Xml;
 
 public partial class levy : System.Web.UI.Page
 {
-    string joo = "images / Anna2009.jpg";
+    //string joo = "images / Anna2009.jpg";
+    int joopa = 1, tila=0;
 
+    XmlDocument doc = new XmlDocument();
+    XmlNodeList nodeList;
+    string k = "images/";
+    string k2 = ".jpg";
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        // using
+        doc.Load(@"f:\LevykauppaX.xml");
 
+
+        //XmlNodeList nodeList;
+        XmlNode root = doc.DocumentElement;
+
+        nodeList = root.SelectNodes("/Records/genre/record");
+        //TextBox1.Text = "1";
+
+        if (tila == 0)
+        {
+            //ListBox1.ClearSelection();
+            ListBox1.Items.Clear();
+            for (int i = 0; i < nodeList.Count; i++)
+            {
+                if (tila == 0)
+                {
+                    ListBox1.Items.Add(nodeList[i].Attributes["Artist"].InnerText + " : " +
+                    nodeList[i].Attributes["Title"].InnerText + "\n ISBN = " + nodeList[i].Attributes["ISBN"].InnerText + "\n Hinta : " +
+                    nodeList[i].Attributes["Price"].InnerText);// vain 2 namea
+                }
+
+                switch (i)
+                {
+                    case 0:
+                        image.Src = k + nodeList[i].Attributes["ISBN"].InnerText + k2;
+                        break;
+                    case 1:
+                        image2.Src = k + nodeList[i].Attributes["ISBN"].InnerText + k2;
+                        break;
+                    case 2:
+                        image3.Src = k + nodeList[i].Attributes["ISBN"].InnerText + k2;
+                        break;
+                    case 3:
+                        image4.Src = k + nodeList[i].Attributes["ISBN"].InnerText + k2;
+                        break;
+                    case 4:
+                        image5.Src = k + nodeList[i].Attributes["ISBN"].InnerText + k2;
+                        break;
+                    case 5:
+                        image6.Src = k + nodeList[i].Attributes["ISBN"].InnerText + k2;
+                        break;
+                }
+                image7.Src = k + "Paula2012.JPG";
+            }
+        }
+        tila = 1;
     }
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        XmlDocument doc = new XmlDocument(); // using
+        
+               
 
-        // FileStream fs = new FileStream("F:\LevykauppaX.xml", FileMode.Open, FileAccess.Read);
-        //XmlDocument doc = new XmlDocument();
-        doc.Load(@"g:\LevykauppaX.xml"); 
-// eri levy eri koneella !
-        //doc.Load(fs);
+        
 
-        //doc.Load(@"F:\\LevykauppaX.xml");
+        image8.Src = k + nodeList[int.Parse(TextBox1.Text)].Attributes["ISBN"].InnerText + k2;
 
-        /*XmlDocument doc = new XmlDocument();
-        doc.Load(reader);*/
-
-        //XmlNodeList elemList = doc.GetElementsByTagName("record ISBN");
-
-       // XmlNodeList xnList = doc.SelectNodes("/Records/genre/name");
-        /*foreach (XmlNode xn in xnList)
-        {
-            string firstName = xn["FirstName"].InnerText;
-            string lastName = xn["LastName"].InnerText;
-            Console.WriteLine("Name: {0} {1}", firstName, lastName);
-        }*/
-
-        //TextBox1.Text += xnList[0].InnerText.ToString();
-        //string jii = doc.SelectSingleNode("/Records").InnerXml.ToString();
-       /* XmlNode jii = doc.DocumentElement.SelectSingleNode("/Records");
-        string attr = jii.Attributes["theattributename"]?.InnerText;*/
-
-
-        string jii = doc.SelectSingleNode("/Records/genre").Attributes["name"].InnerText;
-
-        TextBox1.Text = jii;
-
-        //Bitmap myBmp = Bitmap.FromFile("path here");
-        //Bitmap myBmp = new Bitmap("path here");
-
-        /*ImageMap h = new ImageMap();
-
-        h =*/
-        string koo = "images/Laura2012.jpg";
-        image.Src = koo;
-
-        //ImageMap1 = koo;
-
-        //Image ima = Image.FromFile("c:\\FakePhoto1.jpg"); 
-        //Image1.Page =myBmp;// FromFile("c:\\FakePhoto2.jpg");
-        //Image i = Image.FromFile("image.jpg");
-
-
-
-
-        //Image image = new Bitmap(@"c:\FakePhoto.jpg");
-
-        //Image i = Image.FromFile("image.jpg");
-
-        //Canvas.Children.Add(image);
-
-
-
-        //XmlNodeList elemList = doc.SelectNodes("genre");
-
-        /*        for (int i = 0; i < elemList.Count; i++)
-                {
-                    TextBox1.Text += elemList[i].ToString();
-                }*/
+       
+        //string koo = "images/Laura2012.jpg";
+       
     }
 
 
-    /*public void CreateBitmapAtRuntime()
+
+    protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        PictureBox pictureBox1 = new PictureBox();
-        pictureBox1.Size = new Size(210, 110);
-        this.Controls.Add(pictureBox1);
+        joopa = ListBox1.SelectedIndex;
+        tila = 1;
+        TextBox1.Text = tila.ToString();
+    }
 
-        Bitmap flag = new Bitmap(200, 100);
-        Graphics flagGraphics = Graphics.FromImage(flag);
-        int red = 0;
-        int white = 11;
-        while (white <= 100)
-        {
-            flagGraphics.FillRectangle(Brushes.Red, 0, red, 200, 10);
-            flagGraphics.FillRectangle(Brushes.White, 0, white, 200, 10);
-            red += 20;
-            white += 20;
-        }
-        pictureBox1.Image = flag;
-
-    }*/
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        TextBox1.Text = joopa.ToString();
+    }
 }
