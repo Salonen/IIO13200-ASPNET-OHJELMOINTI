@@ -23,6 +23,10 @@ public partial class levy : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+
+        
         // using
         doc.Load(@"f:\LevykauppaX.xml");
 
@@ -36,7 +40,10 @@ public partial class levy : System.Web.UI.Page
         if (tila == 0)
         {
             //ListBox1.ClearSelection();
+            joopa = ListBox1.SelectedIndex;
+                if (joopa<0) joopa = 1;
             ListBox1.Items.Clear();
+            
             for (int i = 0; i < nodeList.Count; i++)
             {
                 if (tila == 0)
@@ -70,17 +77,32 @@ public partial class levy : System.Web.UI.Page
                 image7.Src = k + "Paula2012.JPG";
             }
         }
+        ListBox1.SelectedIndex = joopa;
         tila = 1;
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        
-               
 
-        
 
-        image8.Src = k + nodeList[int.Parse(TextBox1.Text)].Attributes["ISBN"].InnerText + k2;
+
+        try
+        {
+            image8.Src = k + nodeList[joopa/*int.Parse(TextBox1.Text)*/].Attributes["ISBN"].InnerText + k2;
+
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+        
 
        
         //string koo = "images/Laura2012.jpg";
@@ -91,13 +113,13 @@ public partial class levy : System.Web.UI.Page
 
     protected void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        joopa = ListBox1.SelectedIndex;
+        
         tila = 1;
-        TextBox1.Text = tila.ToString();
+        TextBox2.Text = tila.ToString();
     }
 
     protected void Button2_Click(object sender, EventArgs e)
     {
-        TextBox1.Text = joopa.ToString();
+        TextBox2.Text = joopa.ToString();
     }
 }

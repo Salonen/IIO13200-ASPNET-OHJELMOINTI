@@ -35,6 +35,7 @@
         <p>
             <asp:Button ID="Button2" runat="server" Text="Näytä palaute" OnClick="Button2_Click" />
             <asp:Button ID="Button3" runat="server" Text="Lue MySQL" Width="78px" OnClick="Button3_Click" />
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         </p>
         <asp:TextBox ID="TextBox8" runat="server" TextMode="MultiLine" Height="78px" Width="1223px"></asp:TextBox>
         <asp:TextBox ID="TextBox9" runat="server" TextMode="MultiLine" Height="75px" Width="1217px"></asp:TextBox>

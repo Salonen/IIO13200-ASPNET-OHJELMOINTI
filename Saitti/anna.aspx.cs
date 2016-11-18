@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Configuration;
 
 public partial class anna : System.Web.UI.Page
 {
@@ -20,6 +21,9 @@ public partial class anna : System.Web.UI.Page
 
     protected void Button2_Click(object sender, EventArgs e)
     {
+        try
+        {
+
         XmlDocument doc = new XmlDocument();
         XmlNodeList nodeList;
         XmlNodeList nodeList2;
@@ -32,7 +36,7 @@ public partial class anna : System.Web.UI.Page
         string k2 = ".jpg";
           
         // using
-        doc.Load(@"f:\Palautteet.xml");
+        doc.Load(@"f:\Palautteet.xml"); // Muista myös toinen ja kolmas
 
 
         //XmlNodeList nodeList;
@@ -45,17 +49,10 @@ public partial class anna : System.Web.UI.Page
         nodeList5 = root.SelectNodes("/palautteet/palaute/hyvaa");
         nodeList6 = root.SelectNodes("/palautteet/palaute/parannettavaa");
         nodeList7 = root.SelectNodes("/palautteet/palaute/muuta");
-        //TextBox1.Text = "1";
-
-        //if (tila == 0)
-        //{
-        //ListBox1.ClearSelection();
-        //ListBox1.Items.Clear();
+        
         for (int i = 0; i < nodeList.Count; i++)
             {
-            //      if (tila == 0)
-            //    {
-            //      ListBox1.Items.Add(nodeList[i].Attributes["Artist"].InnerText + " : " +
+            
             TextBox8.Text += nodeList[i].InnerText.ToString() + " : ";
             TextBox8.Text += nodeList2[i].InnerText.ToString() + " : ";
             TextBox8.Text += nodeList3[i].InnerText.ToString() + " : ";
@@ -65,79 +62,80 @@ public partial class anna : System.Web.UI.Page
             TextBox8.Text += nodeList7[i].InnerText.ToString() + " : " + "\n";
 
 
-            /*+ "\n ISBN = " + nodeList[i].Attributes["ISBN"].InnerText + "\n Hinta : " +
-                    nodeList[i].Attributes["Price"].InnerText);// vain 2 namea*/
-            //}
+            
+        }
+
+        }
+        catch (Exception)
+        {
+
+            throw;
         }
     }
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        XDocument doc = XDocument.Load(@"f:\Palautteet.xml");
+        try
+        {
+
+       
+        if (TextBox1.Text.Length == 0 ||
+            TextBox2.Text.Length == 0 ||
+            TextBox3.Text.Length == 0 ||
+            TextBox4.Text.Length == 0 ||
+            TextBox5.Text.Length == 0 ||
+            TextBox6.Text.Length == 0 ||
+            TextBox7.Text.Length == 0   
+            )
+        {
+            Label1.Text = "Required field is empty!";
+        }
+                // Message box
+        else {     
+
+        XDocument doc = XDocument.Load(@"f:\Palautteet.xml"); // Muista myös toinen ja kolmas
         XElement xml = doc.Element("palautteet");
-        /*xml.Add(new XElement("Student",
-                   new XElement("FirstName", "David"),
-                   new XElement("LastName", "Smith")));*/
-        //doc.Save(@"f:\Palautteet.xml");
-
-
-        //XElement xml = XElement.Load(@"f:\Palautteet.xml");
-       /* xml.Add(
         
-        new XElement("pvm", "eee"),
-        new XElement("tekija", "eee"),
-        new XElement("opittu", "eee"),
-        new XElement("haluanoppia", "eee"),
-        new XElement("hyvaa", "eee"),
-        new XElement("parannettavaa", "eee"),
-        new XElement("muuta", "eee"));
-        xml.Save(@"f:\Palautteet.xml");*/
 
         xml.Add(
         new XElement("palaute",
-        new XElement("pvm", "eee"),
-        new XElement("tekija", "eee"),
-        new XElement("opittu", "eee"),
-        new XElement("haluanoppia", "eee"),
-        new XElement("hyvaa", "eee"),
-        new XElement("parannettavaa", "eee"),
-        new XElement("muuta", "eee")));
-        xml.Save(@"f:\Palautteet.xml");
+        new XElement("pvm", TextBox1.Text),
+        new XElement("tekija", TextBox2.Text),
+        new XElement("opittu", TextBox3.Text),
+        new XElement("haluanoppia", TextBox4.Text),
+        new XElement("hyvaa", TextBox5.Text),
+        new XElement("parannettavaa", TextBox6.Text),
+        new XElement("muuta", TextBox7.Text)));
+        xml.Save(@"f:\Palautteet.xml");  // Muista myös toinen ja kolmas
 
+           
+            }
+        }
+        catch (Exception)
+        {
 
-        /* XmlDocument  doc = new XmlDocument();
-        doc.Load(@"f:\Palautteet.xml");
+            throw;
+        }
 
-        XPathNavigator navigator = doc.CreateNavigator();
-
-        navigator.MoveToChild("/palautteet/palaute", "");
-        writer = navigator.AppendChild();
-
-        xmlWriter.WriteStartElement("Student");
-        xmlWriter.WriteElementString("FirstName", firstName);
-        xmlWriter.WriteElementString("LastName", lastName);
-        xmlWriter.WriteEndElement(); 
-
-        //if (newDoc)
-            xmlWriter.WriteEndDocument();
-
-        xmlWriter.Close(); 
-
-        //if (!newDoc)
-          //  doc.Save(nameFile);*/
     }
 
     protected void Button3_Click(object sender, EventArgs e) // muista download mysql
     {
         //string cs = "server=mysql.labranet.jamk.fi;user=koodari;" + "pwd=koodari16;database=salesa;"; //@
         // salasana piilossa
-        string cs = "Data source=mysql.labranet.jamk.fi;Initial Catalog=salesa;user=salesa;password=";// + "MySql.Data.MySqlClient";
+        try
+        {
+
+        
+        string cs = ConfigurationManager.ConnectionStrings["Mysli"].ConnectionString; //Mysli;//"Data source=mysql.labranet.jamk.fi;Initial Catalog=salesa;user=salesa;password=f";// + "MySql.Data.MySqlClient";
+
+        // pois salasana ja tämä? kun laitat githubbiin
 
         MySqlConnection conn = null;
         MySqlDataReader rdr = null;
 
-        try
-        {
+        /*try
+        {*/
             conn = new MySqlConnection(cs);
             conn.Open();
 
@@ -154,46 +152,39 @@ public partial class anna : System.Web.UI.Page
             using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
             {
                 da.Fill(dt2);
-            }
 
-            TextBox9.Text += dt2.Rows[0].ToString();
 
-            int i = 0;
-            string seura;
-            while (i < dt2.Rows.Count)
-            {
-                seura = dt2.Rows[i]["seura"].ToString();
+                TextBox9.Text += dt2.Rows[0].ToString();
 
-                TextBox9.Text += dt2.Rows[i]["palautteet/palaute/pvm"].ToString();
-                TextBox9.Text += dt2.Rows[i]["palautteet/palaute/tekija"].ToString();
-                TextBox9.Text += dt2.Rows[i++]["palautteet/palaute/opittu"].ToString();
-                /*comboBox.Items.Add(seura);
-                pelaajat.Add(new Pelaaja(textBox.Text, textBox1.Text, seura, int.Parse(textBox2.Text)));*/
+                int i = 0;
+                //string seura;
+                while (i < dt2.Rows.Count)
+                {
+                    //seura = dt2.Rows[i]["seura"].ToString();
 
+                    TextBox9.Text += dt2.Rows[i]["pvm"].ToString();
+                    TextBox9.Text += dt2.Rows[i]["tekija"].ToString();
+                    TextBox9.Text += dt2.Rows[i]["opittu"].ToString();
+                    TextBox9.Text += dt2.Rows[i]["haluanoppia"].ToString();
+                    TextBox9.Text += dt2.Rows[i]["hyvaa"].ToString();
+                    TextBox9.Text += dt2.Rows[i]["parannettavaa"].ToString();
+                    TextBox9.Text += dt2.Rows[i++]["muuta"].ToString() + "\n";
+                    /*comboBox.Items.Add(seura);
+                    pelaajat.Add(new Pelaaja(textBox.Text, textBox1.Text, seura, int.Parse(textBox2.Text)));*/
+
+                }
             }
 
             conn.Close();
 
         }
-        catch (MySqlException ex)
+        catch (Exception)
         {
-            Console.WriteLine("Error: {0}", ex.ToString());
 
-        }
-        finally
-        {
-            if (rdr != null)
-            {
-                rdr.Close();
-            }
-
-            if (conn != null)
-            {
-                conn.Close();
-            }
-
+            throw;
         }
 
     }
 }
+
 

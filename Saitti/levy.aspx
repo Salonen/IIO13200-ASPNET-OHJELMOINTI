@@ -17,7 +17,7 @@
     <div>
     
     </div>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Hae levyt" />
        <!-- &nbsp;-->
         
         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Button" />
@@ -35,9 +35,10 @@
     <img id="image8" src="" runat="server"/>
         <p>
         <asp:TextBox ID="TextBox1" Text="1" runat="server" TextMode="MultiLine" Height="100px" Width="627px"></asp:TextBox>
-            Anna kuvan numero 1-5
+            Anna kuvan numero 1-5 (Älä käytä tätä, tämä on vain testausta varten, käytä nappia ja listboxia
             <asp:ListBox ID="ListBox1" runat="server" Height="99px" OnSelectedIndexChanged="ListBox1_SelectedIndexChanged" style="margin-top: 0px" Width="514px"></asp:ListBox>
         </p>
+        <asp:TextBox ID="TextBox2" runat="server" Height="63px" Width="496px"></asp:TextBox>
     </form>
     </body>
 </html>

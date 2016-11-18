@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:Button ID="btnHae" runat="server" Text="Hae työntekijät" OnClick="btnHae_Click" />
+        <asp:Button ID="btnHae" runat="server" Text="Hae junat" OnClick="btnHae_Click" />
         <div id="esitys">
              <h2>Työntekijämme</h2>
             <asp:GridView 
